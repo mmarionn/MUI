@@ -1,5 +1,6 @@
 -------------------------------------------
--- Initialization
+-- MUI
+-- Initialization and default options
 -------------------------------------------
 
 local addonName, nameSpace = ...
@@ -10,4 +11,19 @@ nameSpace[3] = {}
 
 MUI = nameSpace
 
-local M, C, L = unpack(nameSpace)
+local M, DB, L = unpack(nameSpace)
+
+DB.DefaultOptions = {
+
+
+
+
+
+}
+
+function DB:Setting()
+	SetCVar("alwaysShowActionBars", 1)
+	print(123)
+end
+DB:RegisterEvent("PLAYER_LOGIN")
+DB:SetScript("OnEvent", self:Setting())
