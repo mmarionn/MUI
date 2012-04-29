@@ -1,5 +1,4 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file="MUI.lua"/>
-	<Script file="f.lua"/>
-	<Include file="Modules\Actionbars\actionbars.xml"/>
+	<Script file="zhCN.lua"/>
+	<Script file="zhTW.lua"/>
 </Ui>

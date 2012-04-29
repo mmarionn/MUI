@@ -1,4 +1,4 @@
 ## Interface: 40300
 ## Title: |cffFF0000M|r |cffFFFFFFUI|r
 
-launch.xml
+MUI.xml

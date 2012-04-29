@@ -1,0 +1,9 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="MUI.lua"/>
+	<Include file="locales\load_locales.xml"/>
+	<Include file="config\load_config.xml"/>
+	<Include file="core\load_core.xml"/>
+	<Include file="modules\load_modules.xml"/>
+	<Include file="layout\load_layout.xml"/>
+	<Script file="test.lua"/>
+</Ui>

@@ -1,5 +1,20 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="_GUI\GUI.lua"/>
+	<Script file="_skin\skin.lua"/>
+	<Script file="bags\bags.lua"/>
+	<Script file="buffs\buffs.lua"/>
+	<Script file="combatlogtexts\combatlogtexts.lua"/>
+	<Script file="lootroll\loot.lua"/>
+	<Script file="lootroll\lootroll.lua"/>
+	<Script file="maps\maps.lua"/>
+	<Script file="micromenu\micromenu.lua"/>
+	<Script file="nameplates\nameplates.lua"/>
+	<Script file="socials\load_socials.xml"/>
+	<Script file="tooltip\tooltip.lua"/>
 	<Script file="MUI.lua"/>
-	<Script file="f.lua"/>
-	<Include file="Modules\Actionbars\actionbars.xml"/>
+
+	<Include file="actionbars\load_actionbars.xml"/>
+	<include file="datatexts\load_datatexts.xml"/>
+	<include file="misc\load_misc.xml"/>
+	
 </Ui>

@@ -1,20 +1,11 @@
 -------------------------------------------
 -- MUI
--- Initialization and default options
+-- Config
 -------------------------------------------
 
-local addonName, nameSpace = ...
+local M, DB, L = unpack(select(2, ...))
 
-nameSpace[1] = {}
-nameSpace[2] = {}
-nameSpace[3] = {}
-
-MUI = nameSpace
-
-local M, DB, L = unpack(nameSpace)
-
-DB.DefaultOptions = {}
-DB.DefaultOptions.mt = {
+DB.DefaultOptions = {
 	["GlobalOptions"] = {--[[ 全局设定 ]]
 		["AutoResolution"] = true,										--[[ true / false — 是否自动将分辨率设置为适应屏幕 ]]
 		["UIScale"] = .65,												--[[ UI缩放值，建议值为0.65~0.8 ]]
@@ -122,7 +113,7 @@ DB.DefaultOptions.mt = {
 
 	["Bags"] = {--[[ 背包增强 ]]
 		["Enable"] = true,											--[[ true / false — 是否启用背包增强 ]]
-		["ButtonPerRow"] = 10,										--[[ 一体式背包的每行格子数 ]]
+		["ButtonPerRow"] = 10,										--[[ 一体式背包每行单元格数 ]]
 		["ButtonSize"] = 32,
 		["Spacing"] = 32,
 		
@@ -133,16 +124,15 @@ DB.DefaultOptions.mt = {
 		["IconPerRow"] = 10,
 	},
 
-	["Chat"] = {--[[ 社交功能增强 ]]
-		["Enable"] = true,											--[[ true / false — 是否启用社交功能增强 ]]
-		
-	},
-
 	["CombatLogTexts"] = {--[[ 滚动战斗信息美化 ]]
 		["Enable"] = true,											--[[ true / false — 是否启用战斗信息美化 ]]
 		
 	},
 
+	["DataTexts"] = {--[[ 数据文本 ]]
+		["Enable"] = true,
+	},
+	
 	["Lootframe"] = {--[[ 拾取框体 ]]
 		["Enable"] = true,											--[[ true / false — 是否启用拾取框体 ]]
 		["IconSize"] = 34,											--[[ 拾取框体物品图标大小 ]]
@@ -183,11 +173,12 @@ DB.DefaultOptions.mt = {
 		["ClassColor"] = true,										--[[ true / false — 是否开启生命条职业着色 ]]
 		["ClassIcon"] = true,										--[[ true / false — 是否显示职业图标 ]]
 	},
-
-	["DataTexts"] = {--[[ 数据文本 ]]
-		["Enable"] = true,
+	
+	["Socials"] = {--[[ 社交功能增强 ]]
+		["Enable"] = true,											--[[ true / false — 是否启用社交功能增强 ]]
+		
 	},
-
+	
 	["Tooltip"] = {--[[ 鼠标提示 ]]
 		["Enable"] = true,											--[[ true / false —	是否启用鼠标提示增强 ]]
 		["AnchorCursor"] = true,									--[[ true / false —	是否使鼠标提示跟随鼠标 ]]
@@ -209,45 +200,3 @@ DB.DefaultOptions.mt = {
 		["InfoFilter"] = false,									--[[ true / false —	是否将黄字信息显示在聊天栏内 ]]
 	},
 }
-setmetatable(DB.DefaultOptions, DB.DefaultOptions.mt)
-DB.DefaultOptions.mt.__index = DB.DefaultOptions.mt
-
-print(DB.DefaultOptions.GlobalOptions.FontSize)
-DB.CVar = {
-	["alwaysShowActionBars"] = true,
-
-}
-
-DB.EventHandler = CreateFrame("Frame")
-function DB:SetCVars()
-	SetCVar("alwaysShowActionBars", 1)
-
-end
-DB.EventHandler:RegisterEvent("PLAYER_LOGIN")
-DB.EventHandler:SetScript("OnEvent", DB.SetCVars)
-
-function M:SetProperty(widget, property)
-	local frame = CreateFrame(widget, property.Name, property.Parent)
-	frame:SetWidth(property.Width)
-	frame:SetHeight(property.Height)
-	frame:SetPoint("CENTER")
-	for k, v in pairs(property) do
-		frame[k] = v
-	end
-	return frame
-end
-
-function M:Create(widget)
-	return function(property)
-		return M:SetProperty(widget, property)
-	end
-end
-
-M:Create "Frame" {
-	Name = "TestFrame",
-	Parent = UIParent,
-	Width = 120,
-	Height = 180,
-	Description = [[这是一个测试面板]],
-}
-print(TestFrame.Name, TestFrame.Description)
