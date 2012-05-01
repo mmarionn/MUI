@@ -13,240 +13,78 @@ MUI = nameSpace
 
 local M, DB, L = unpack(nameSpace)
 
-DB.DefaultOptions = {}
-DB.DefaultOptions.mt = {
-	["GlobalOptions"] = {
-		["AutoResolution"] = true,
-		["UIScale"] = .65,
-		["ClassColor"] = true,
-		["BorderColor"] = { .1, .5, .85 },
-		["BackdropColor"] = { 0, 0, 0 },
-		["NormalFont"] = "Fonts\\ARIALN.ttf",
-		["PixelFont"] = "Interface\\Addons\\MUI\\Media\\Fonts\\pixel.ttf",
-		["FontSize"] = 14,
-	},
+local tinsert = tinsert
+local unpack = unpack
+local format = format
+
+local metaMethods = {
+	-- a + b	并集
+	Union = function(a, b)
+		for k in pairs(b) do
+			if a[k] then
+				a["COPY_"..k] = b[k]
+				print(format("|cffFF7F50Try to call mt.__add, but the|r value |cff87CEEBIndex=\"%s\"|r|cff00FF7F(%s)|r |cffFF7F50is already exists.|r", k, type(a[k])))
+			else
+				a[k] = b[k]
+			end
+		end
+		return a
+	end,
 	
-	["Actionbars"] = {
-		["Enable"] = true,
-		["ShowHotkeyText"] = false,
-		["HotkeyTextSize"] = 14,
-		["ShowMacroText"] = false,
-		["CooldownTextSize"] = 22,
-		["ShowGrid"] = true,
-
-		["Bar1"] = {
-			["Enable"] = true,
-			["Scale"] = 1,
-			["Alpha"] = 1,
-			["ButtonSize"] = 40,
-			["Spacing"] = 3,
-			["Style"] = "1*12",
-			["Position"] = { "BOTTOM", UIParent, "BOTTOM", 0, 15 },
-			["ShowOnMouseover"] = false,
-			["ShowInCombat"] = false, },
-
-		["Bar2"] = {
-			["Enable"] = true, 
-			["Scale"] = 0.9,
-			["Alpha"] = 1,
-			["ButtonSize"] = 32,
-			["Spacing"] = 3,
-			["Style"] = "1*12",
-			["Position"] = { "BOTTOMRIGHT", ActionButton6, "TOPRIGHT", 0, 3 },
-			["ShowOnMouseover"] = false,
-			["ShowInCombat"] = false, },
-
-		["Bar3"] = {
-			["Enable"] = true, 
-			["Scale"] = 0.9,
-			["Alpha"] = 1,
-			["ButtonSize"] = 32,
-			["Spacing"] = 3,
-			["Style"] = "1*12",
-			["Position"] = { "BOTTOMLEFT", ActionButton7, "TOPLEFT", 0, 3 },
-			["ShowOnMouseover"] = false,
-			["ShowInCombat"] = false, },
-
-		["Bar4"] = {
-			["Enable"] = true, 
-			["Scale"] = 0.9,
-			["Alpha"] = 1,
-			["ButtonSize"] = 32,
-			["Spacing"] = 3,
-			["Style"] = "12*1",
-			["Position"] = { "RIGHT", UIParent, "RIGHT", -25, 0 },
-			["ShowOnMouseover"] = false,
-			["ShowInCombat"] = false, },
-
-		["Bar5"] = {
-			["Enable"] = true, 
-			["Scale"] = 0.9,
-			["Alpha"] = 1,
-			["ButtonSize"] = 32,
-			["Spacing"] = 3,
-			["Style"] = "12*1",
-			["Position"] = { "TOPRIGHT", MultiBarRightButton1, "TOPLEFT", -3, 0 },
-			["ShowOnMouseover"] = false,
-			["ShowInCombat"] = false, },
-
-		["PetBar"] = {
-			["Enable"] = true, 
-			["Scale"] = 0.9,
-			["Alpha"] = 1,
-			["ButtonSize"] = 32,
-			["Spacing"] = 3,
-			["Position"] = { "BOTTOMRIGHT", MultiBarBottomRightButton11, "TOPRIGHT", 0, 3 },
-			["ShowOnMouseover"] = false,
-			["ShowInCombat"] = false, },
+	-- a - b	补集
+	Complement = function(a, b)
+		local res = {}
+		for k in pairs(a) do
+			if not b[k] then
+				res[k] = a[k]
+			end
+		end
+		return res
+	end,
 	
-		["StanceBar"] = {
-			["Enable"] = true, 
-			["Scale"] = 0.9,
-			["Alpha"] = 1,
-			["ButtonSize"] = 32,
-			["Spacing"] = 3,
-			["Position"] = { "BOTTOMLEFT", MultiBarBottomLeftButton2, "TOPLEFT", 0, 3 },
-			["ShowonMouseover"] = false,
-			["ShowinCombat"] = false, },
-		
-		["TotemBar"] = {
-			["Enable"] = true, 
-			["Scale"] = .9,
-			["Alpha"] = 1,
-			["ButtonSize"] = 32,
-			["Spacing"] = 3,
-			["Position"] = { "BOTTOMLEFT", MultiBarBottomLeftButton2, "TOPLEFT", 0, 3 },
-			["ShowOnMouseover"] = false,
-			["ShowInCombat"] = false, },
-	},
-
-	["Bags"] = {
-		["Enable"] = true,
-		["ButtonPerRow"] = 10,
-		["ButtonSize"] = 32,
-		["Spacing"] = 32,
-		
-	},
-
-	["Buffs"] = {
-		["Enable"] = true,
-		["IconPerRow"] = 10,
-	},
-
-	["CombatLogTexts"] = {
-		["Enable"] = true,
-		
-	},
-
-	["DataTexts"] = {
-		["Enable"] = true,
-	},
+	-- a * b	交集
+	Intersection = function(a, b)
 	
-	["Lootframe"] = {
-		["Enable"] = true,
-		["IconSize"] = 34,
-		["Scale"] = 1,
-		["Position"] = { 150, 0 },
-	},
-
-	["LootRollframe"] = {
-		["Enable"] = true,
-		["IconSize"] = 34,
-		["BarWidth"] = 300,
-		["BarHeight"] = 16,
-		["Growth"] = "TOP",
-		["Scale"] = 1,
-	},
+	end,
 	
-	["Minimap"] = {
-		["Enable"] = true,
-		["Width"] = 150,
-		["Height"] = 150,
-		["Scale"] = 1,
-		["ZoneText"] = true,
-		["Position"] = { "TOPRIGHT", UIParent, "TOPRIGHT", -20, -20 },
-		["CollectMinimapButton"] = true,
-	},
-
-	["Micromenu"] = {
-		["Enable"] = true,
-		["Scale"] = 1,
-		["Position"] = { "TOPRIGHT", UIParent, "TOPRIGHT", -20, -20 },
-	},
-
-	["Nameplates"] = {
-		["Enable"] = true,
-		["Width"] = 128,
-		["Height"] = 8,
-		["Scale"] = 1,
-		["ClassColor"] = true,
-		["ClassIcon"] = true,
-	},
+	-- a / b	子集
+	Subset = function(a, b)
 	
-	["Socials"] = {
-		["Enable"] = true,
-		
-	},
+	end,
 	
-	["Tooltip"] = {
-		["Enable"] = true,
-		["AnchorCursor"] = true,
-		["OffsetXY"] = { 16, 16 },
-		["AlwaysGetDetailInfo"] = false,
-	},
-
-	["WatchFrame"] = {
-		["Enable"] = true,
-		["WatchFrameAutoCollapse"] = true,
-		["Scale"] = 1,
-		["Position"] = { "TOPRIGHT", UIParent, "TOPRIGHT", -20, -20 },
-	},
-
-	["Misc"] = {
-		["AutoRepair"] = true,
-		["AutoSellJunk"] = true,
-		["ErrorFilter"] = false,
-		["InfoFilter"] = false,
-	}
-}
-setmetatable(DB.DefaultOptions, DB.DefaultOptions.mt)
-DB.DefaultOptions.mt.__index = DB.DefaultOptions.mt
-
-print(DB.DefaultOptions.GlobalOptions.FontSize)
-DB.CVar = {
-	["alwaysShowActionBars"] = true,
+	Defaults = function(table, key)
+		return key
+	end,
 }
 
-DB.EventHandler = CreateFrame("Frame")
-function DB:SetCVars()
-	SetCVar("alwaysShowActionBars", 1)
-
+for i = 1, 3 do
+	nameSpace[i].mt = {}
+	setmetatable(nameSpace[i], nameSpace[i].mt)
+	nameSpace[i].mt.__add = metaMethods.Union
+	nameSpace[i].mt.__sub = metaMethods.Complement
+	nameSpace[i].mt.__mul = metaMethods.Intersection
+	nameSpace[i].mt.__div = metaMethods.Subset
 end
-DB.EventHandler:RegisterEvent("PLAYER_LOGIN")
-DB.EventHandler:SetScript("OnEvent", DB.SetCVars)
+L.mt.__index= metaMethods.Defaults
 
-function M:SetProperty(widget, property)
-	local frame = CreateFrame(widget, property.Name, property.Parent)
-	frame:SetWidth(property.Width)
-	frame:SetHeight(property.Height)
-	frame:SetPoint("CENTER")
-	for k, v in pairs(property) do
-		frame[k] = v
-	end
-	return frame
-end
-
-function M:Create(widget)
-	return function(property)
-		return M:SetProperty(widget, property)
-	end
-end
-
-M:Create "Frame" {
-	Name = "TestFrame",
-	Parent = UIParent,
-	Width = 120,
-	Height = 180,
-	Description = [[这是一个测试面板]],
+local TABLE1 = {
+abc = 124,
+cde = 345,
+fgh = 678,
 }
-print(TestFrame.Name, TestFrame.Description)
+
+TABLE1.mt = {}
+setmetatable(TABLE1, TABLE1.mt)
+	TABLE1.mt.__add = metaMethods.Union
+	TABLE1.mt.__sub = metaMethods.Complement
+	TABLE1.mt.__mul = metaMethods.Intersection
+	TABLE1.mt.__div = metaMethods.Subset
+local TABLE2 = {
+abc = 123,
+jkl = 321,
+}
+
+local result = TABLE2 - TABLE1
+for k, v in pairs(result) do
+print(k, v)
+end

@@ -176,7 +176,6 @@ DB.DefaultOptions = {
 	
 	["Socials"] = {
 		["Enable"] = true,
-		
 	},
 	
 	["Tooltip"] = {
