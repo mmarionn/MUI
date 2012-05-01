@@ -66,25 +66,3 @@ for i = 1, 3 do
 	nameSpace[i].mt.__div = metaMethods.Subset
 end
 L.mt.__index= metaMethods.Defaults
-
-local TABLE1 = {
-abc = 124,
-cde = 345,
-fgh = 678,
-}
-
-TABLE1.mt = {}
-setmetatable(TABLE1, TABLE1.mt)
-	TABLE1.mt.__add = metaMethods.Union
-	TABLE1.mt.__sub = metaMethods.Complement
-	TABLE1.mt.__mul = metaMethods.Intersection
-	TABLE1.mt.__div = metaMethods.Subset
-local TABLE2 = {
-abc = 123,
-jkl = 321,
-}
-
-local result = TABLE2 - TABLE1
-for k, v in pairs(result) do
-print(k, v)
-end

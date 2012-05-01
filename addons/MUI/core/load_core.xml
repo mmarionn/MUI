@@ -3,7 +3,7 @@
 	<Script file="commands\commands.lua"/>
 	<Script file="constants\constants.lua"/>
 	<Script file="functions\api.lua"/>
-	<Script file="functions\funcs.lua"/>
+	<Script file="functions\common.lua"/>
 	<Script file="functions\math.lua"/>
 	<Script file="animations\animations.lua"/>
 	<include file="tempates\load_templates.xml"/>
