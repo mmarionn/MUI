@@ -16,7 +16,7 @@ DB.DefaultOptions = {
 		["PixelFont"] = "Interface\\Addons\\MUI\\Media\\Fonts\\pixel.ttf",
 		["FontSize"] = 14,
 	},
-	
+
 	["Actionbars"] = {
 		["Enable"] = true,
 		["ShowHotkeyText"] = false,

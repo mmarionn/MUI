@@ -17,13 +17,13 @@ local tinsert = tinsert
 local unpack = unpack
 local format = format
 
-local metaMethods = {
+M.metaMethods = {
 	-- a + b	并集
 	Union = function(a, b)
 		for k in pairs(b) do
 			if a[k] then
 				a["COPY_"..k] = b[k]
-				print(format("|cffFF7F50Try to call mt.__add, but the|r value |cff87CEEBIndex=\"%s\"|r|cff00FF7F(%s)|r |cffFF7F50is already exists.|r", k, type(a[k])))
+				print(format("The value |cff87CEEBIndex=\"%s\"|r|cff00FF7F(%s)|r |cffFF7F50is already exists.|r", k, type(a[k])))
 			else
 				a[k] = b[k]
 			end
@@ -57,12 +57,11 @@ local metaMethods = {
 	end,
 }
 
-for i = 1, 3 do
-	nameSpace[i].mt = {}
-	setmetatable(nameSpace[i], nameSpace[i].mt)
-	nameSpace[i].mt.__add = metaMethods.Union
-	nameSpace[i].mt.__sub = metaMethods.Complement
-	nameSpace[i].mt.__mul = metaMethods.Intersection
-	nameSpace[i].mt.__div = metaMethods.Subset
-end
-L.mt.__index= metaMethods.Defaults
+M.metaMethods.__add = M.metaMethods.Union
+M.metaMethods.__sub = M.metaMethods.Complement
+M.metaMethods.__mul = M.metaMethods.Intersection
+M.metaMethods.__div = M.metaMethods.Subset
+
+setmetatable(M, M.metaMethods)
+setmetatable(DB, M.metaMethods)
+setmetatable(L, {__index = M.metaMethods.Defaults})

@@ -1,6 +1,6 @@
 -------------------------------------------
 -- MUI
--- Common functions
+-- API-2
 -------------------------------------------
 
 local M, DB, L = unpack(select(2, ...))
@@ -11,8 +11,8 @@ local tonumber = tonumber
 local modf = math.modf
 
 local commonFuncs = {
-
-
+	
+	
 
 }
 

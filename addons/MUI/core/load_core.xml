@@ -1,10 +1,9 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file="_libs\lib.lua"/>
-	<Script file="commands\commands.lua"/>
 	<Script file="constants\constants.lua"/>
-	<Script file="functions\api.lua"/>
-	<Script file="functions\common.lua"/>
-	<Script file="functions\math.lua"/>
+	<Script file="commands\commands.lua"/>
+	<Script file="functions\functions.lua"/>
+	<Script file="functions\api1.lua"/>
+	<Script file="functions\api2.lua"/>
 	<Script file="animations\animations.lua"/>
-	<include file="tempates\load_templates.xml"/>
+	<include file="templates\load_templates.xml"/>
 </Ui>

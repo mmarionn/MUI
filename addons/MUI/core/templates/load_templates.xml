@@ -1,0 +1,12 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="templates.lua"/>
+	<Script file="templates\button.lua"/>
+	<Script file="templates\checkbutton.lua"/>
+	<Script file="templates\eventhandler.lua"/>
+	<Script file="templates\fontstring.lua"/>
+	<Script file="templates\panel.lua"/>
+	<Script file="templates\texture.lua"/>
+	<Script file="templates\statusbar.lua"/>
+	<Script file="templates\scrollframe.lua"/>
+	<Script file="templates\scrollingmessage.lua"/>
+</Ui>
